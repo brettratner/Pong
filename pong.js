@@ -46,6 +46,9 @@ var score1 = 0;
 var score2 = 0;
 var pause = false;
 var menu  = false;
+var player1Win = false;
+var player2Win = false;
+var reset = false;
 var randomBallAngle = Math.floor(1 + Math.random() * 5)
     //        var audio = new Audio('pause.mp3');
             var audio2 = new Audio('bounce.m4a');
@@ -130,6 +133,11 @@ if (menu == false) {
             downPressed2 = false;
         } else if (e.keyCode == 80) {
             pause = !pause;
+        }
+        if(player1Win == true || player2Win == true){
+            if(e.keyCode == 32){
+                reset = true;
+            }
         }
     }
 
@@ -222,11 +230,30 @@ if (menu == false) {
     
     function win(){
         
-        if(score1 == 10 ){
-            
-        }else if(score2 == 10){
+        if(score1 == 1){
+            BallXSpeed = 0;
+            BallYSpeed = 600;
+            paddleYPos1 += paddleYPos1;
+            paddleYPos2 += paddleYPos2;
+            ctx.font = "100px Arial";
+            ctx.fillStyle = "#000";
+            ctx.fillText("Player 1 Wins", canvas.width / 5, canvas.height / 1.8);
+            player1Win = true;
+        }else if(score2 == 1){
+            BallXSpeed = 0;
+            BallYSpeed = 600;
+            paddleYPos1 += paddleYPos1;
+            paddleYPos2 += paddleYPos2;
+            ctx.font = "100px Arial";
+            ctx.fillStyle = "#000";
+            ctx.fillText("Player 2 Wins", canvas.width / 5, canvas.height / 1.8);
+            player2Win = true;
             
         }
+    }
+    
+    function reset(reset){
+        reset = false; 
     }
             function BallColloideWalls(){
      if (BallYPos + BallYSpeed < ballRadius) {
