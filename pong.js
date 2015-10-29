@@ -15,8 +15,8 @@ var BallYSpeed = 2;
 // height of the paddles
 var paddleHeight1 = 75;
 var paddleHeight2 = 75;
-var paddleHeight3 = 75;
-var paddleHeight4 = 75;
+var paddleHeight3 = 35;
+var paddleHeight4 = 35;
 // length of the paddles
 var paddleWidth1 = 10;
 var paddleWidth2 = 10;
@@ -25,8 +25,8 @@ var paddleWidth4 = 10;
 // sets the paddle on the center to start of Horizontally 
 var paddleXPos1 = 5;
 var paddleXPos2 = canvas.width - paddleWidth2 - 5;
-var paddleXPos3 = 100;
-var paddleXPos4 = canvas.width - paddleWidth4-100;
+var paddleXPos3 = 175;
+var paddleXPos4 = canvas.width - paddleWidth4-175;
 // sets the paddle on the center to start of  vertically
 var paddleYPos1 = (canvas.height / 2) - (paddleHeight1 / 2);
 var paddleYPos2 = (canvas.height / 2) - (paddleHeight2 / 2);
@@ -80,6 +80,13 @@ if (menu == true) {
     ctx.fillText("How To Play:", 50, 100);
     ctx.font = "30px Arial";
     ctx.fillStyle = "#000";
+    function keyUpHandler(e) {
+    if(menu == ture){
+            if(e.keyCode == 90){
+                menu = false;
+            }
+        }
+    }
 }
 if (menu == false) {
     function randomColor1() {
@@ -101,21 +108,21 @@ if (menu == false) {
 
 
     function keyDownHandler(e) {
-        if (e.keyCode == 87) {
+        if (e.keyCode == 81) {
             upPressed1 = true;
-        } else if (e.keyCode == 83) {
+        } else if (e.keyCode == 65) {
             downPressed1 = true;
         } else if (e.keyCode == 38) {
             upPressed2 = true;
         } else if (e.keyCode == 40) {
             downPressed2 = true;
-        } else if (e.keyCode == 87 ) {
+        } else if (e.keyCode == 82 ) {
             upPressed3 = true;           
-        } else if (e.keyCode == 83 ) {
+        } else if (e.keyCode == 70 ) {
             downPressed3 = true;
-        } else if (e.keyCode == 38 ) {
-            upPressed4 == true;
-        } else if (e.keyCode == 40 ) {
+        } else if (e.keyCode == 85 ) {
+            upPressed4 = true;
+        } else if (e.keyCode == 74 ) {
             downPressed4 = true;
         }
 
@@ -123,14 +130,22 @@ if (menu == false) {
 
     function keyUpHandler(e) {
 
-        if (e.keyCode == 87) {
-            upPressed1 = false;
-        } else if (e.keyCode == 83) {
+        if (e.keyCode == 81) {
+            upPressed1 =   false;
+        } else if (e.keyCode == 65) {
             downPressed1 = false;
         } else if (e.keyCode == 38) {
-            upPressed2 = false;
+            upPressed2 =   false;
         } else if (e.keyCode == 40) {
             downPressed2 = false;
+        }else if (e.keyCode == 82 ) {
+            upPressed3 =   false;           
+        } else if (e.keyCode == 70 ) {
+            downPressed3 = false;
+        } else if (e.keyCode == 85 ) {
+            upPressed4 =   false;
+        } else if (e.keyCode == 74 ) {
+            downPressed4 = false;
         } else if (e.keyCode == 80) {
             pause = !pause;
         }
@@ -159,14 +174,36 @@ if (menu == false) {
         ctx.fill();
         ctx.stroke();
         ctx.closePath();
+    }    
+      function drawPaddle3() {
+        ctx.beginPath();
+        ctx.lineWidth = "1";
+        ctx.setLineDash([0.5]);
+        ctx.strokeStyle = "black";
+        ctx.rect(paddleXPos3, paddleYPos3, paddleWidth3, paddleHeight3);
+        ctx.fillStyle = paddleColor;
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
     }
-
-    function drawPaddle2() {
+     function drawPaddle2() {
         ctx.beginPath();
         ctx.lineWidth = "1";
         ctx.setLineDash([0.5]);
         ctx.strokeStyle = "black";
         ctx.rect(paddleXPos2, paddleYPos2, paddleWidth2, paddleHeight2);
+        ctx.fillStyle = paddleColor2;
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+    }
+    
+      function drawPaddle4() {
+        ctx.beginPath();
+        ctx.lineWidth = "1";
+        ctx.setLineDash([0.5]);
+        ctx.strokeStyle = "black";
+        ctx.rect(paddleXPos4, paddleYPos4, paddleWidth4, paddleHeight4);
         ctx.fillStyle = paddleColor2;
         ctx.fill();
         ctx.stroke();
@@ -235,6 +272,8 @@ if (menu == false) {
             BallYSpeed = 600;
             paddleYPos1 += paddleYPos1;
             paddleYPos2 += paddleYPos2;
+            paddleYPos3 += paddleYPos3;
+            paddleYPos4 += paddleYPos4;
             ctx.font = "100px Arial";
             ctx.fillStyle = "#000";
             ctx.fillText("Player 1 Wins", canvas.width / 5, canvas.height / 1.8);
@@ -244,6 +283,8 @@ if (menu == false) {
             BallYSpeed = 600;
             paddleYPos1 += paddleYPos1;
             paddleYPos2 += paddleYPos2;
+            paddleYPos3 += paddleYPos3;
+            paddleYPos4 += paddleYPos4;
             ctx.font = "100px Arial";
             ctx.fillStyle = "#000";
             ctx.fillText("Player 2 Wins", canvas.width / 5, canvas.height / 1.8);
@@ -252,8 +293,25 @@ if (menu == false) {
         }
     }
     
-    function reset(reset){
-        reset = false; 
+    function resetGame(){
+    if(reset == true){
+     player1Win = false;
+     player2Win = false;
+     score1 = 0;
+     score2 = 0;
+     BallXPos = canvas.width / 2;
+     BallYPos = canvas.height / 2;
+     BallXSpeed = -2;
+     BallYSpeed = 2;
+     paddleXPos1 = 5;
+     paddleXPos2 = canvas.width - paddleWidth2 - 5;
+     paddleXPos3 = 175;
+     paddleXPos4 = canvas.width - paddleWidth4-175;
+     paddleYPos1 = (canvas.height / 2) - (paddleHeight1 / 2);
+     paddleYPos2 = (canvas.height / 2) - (paddleHeight2 / 2);
+     paddleYPos3 = (canvas.height / 2) - (paddleHeight2 / 2);
+     paddleYPos4 = (canvas.height / 2) - (paddleHeight2 / 2);
+     reset = false; }
     }
             function BallColloideWalls(){
      if (BallYPos + BallYSpeed < ballRadius) {
@@ -282,7 +340,7 @@ if (menu == false) {
     
     function BallColloidePaddle2(){
         
-            if  (BallXPos <= (paddleXPos2 + paddleWidth2) && paddleXPos2 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos2 + paddleHeight1) && paddleYPos2<= (BallYPos + ballRadius)) {
+            if  (BallXPos <= (paddleXPos2 + paddleWidth2) && paddleXPos2 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos2 + paddleHeight2) && paddleYPos2<= (BallYPos + ballRadius)) {
                 
          
             if (downPressed2 == true) {
@@ -298,10 +356,28 @@ if (menu == false) {
              audio2.play();
         }
     }
+    function BallColloidePaddle3(){
+        
+            if  (BallXPos <= (paddleXPos3 + paddleWidth3) && paddleXPos3 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos3 + paddleHeight3) && paddleYPos3<= (BallYPos + ballRadius)) {  
+                BallXSpeed = -BallXSpeed;
+                BallYSpeed = BallYSpeed;
+                audio2.play();
+        }
+    }
+    function BallColloidePaddle4(){
+        
+            if  (BallXPos <= (paddleXPos4 + paddleWidth4) && paddleXPos4 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos4 + paddleHeight4) && paddleYPos4<= (BallYPos + ballRadius)) {
+                BallXSpeed = -BallXSpeed;
+                BallYSpeed = BallYSpeed;
+                audio2.play();
+            }
+    }
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawPaddle1();
+        drawPaddle3();
         drawPaddle2();
+        drawPaddle4();
         drawBall();
         centerline();
         drawScore1();
@@ -311,7 +387,10 @@ if (menu == false) {
         BallColloideWalls();
         BallColloidePaddle1();
         BallColloidePaddle2();
+        BallColloidePaddle3();
+        BallColloidePaddle4();
         win();
+        resetGame();
 
        
         if (pause == false) {
@@ -324,6 +403,16 @@ if (menu == false) {
                 paddleYPos2 += 6;
             } else if (upPressed2 && paddleYPos2 > 0 + 2) {
                 paddleYPos2 -= 6;
+            }
+            if (upPressed3 && paddleYPos3 > 0 + 2) {
+                paddleYPos3 -= 10;
+            } else if (downPressed3 && paddleYPos3 < canvas.height - paddleHeight3) {
+                paddleYPos3 += 10;
+            }
+            if (upPressed4 && paddleYPos4 > 0 + 2) {
+                paddleYPos4 -= 10;
+            } else if (downPressed4 && paddleYPos4 < canvas.height - paddleHeight4) {
+                paddleYPos4 += 10;
             }
             BallXPos += 3.15 * BallXSpeed;
             BallYPos += 3.15 * BallYSpeed;
