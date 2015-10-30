@@ -1,16 +1,43 @@
 *{
     padding: 0;
-    margin: 0;
+    margin: 0; 
+    background-color: gray;
 }
         
 canvas {
     background: rgba(16, 158, 37, 0.28);
     display: block;
     margin: 0 auto;
+    
 }
 
 h1{
     text-align: center;
     padding: 50px;
     padding-bottom: 50px;
+    color:white;
+}
+h2{
+    text-align: center;
+    padding: 50px;
+    padding-bottom: 50px;
+    color:white;
+}
+.twoPlayer{
+     text-align: center;
+    padding: 50px;
+    padding-bottom: 10px;
+    color:white;
+    text-decoration: none;
+}
+
+.twoPlayer:hover{
+    text-decoration-line: none;
+    }
+.fourPlayer{
+    text-align: center;
+    padding: 50px;
+    padding-bottom: 10px;
+    color:white;
+    text-decoration: none;
 }
