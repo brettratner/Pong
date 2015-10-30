@@ -308,12 +308,12 @@ if (menu == false) {
      BallYSpeed = 2;
      paddleXPos1 = 5;
      paddleXPos2 = canvas.width - paddleWidth2 - 5;
-     paddleXPos3 = 175;
-     paddleXPos4 = canvas.width - paddleWidth4-175;
+//     paddleXPos3 = 175;
+//     paddleXPos4 = canvas.width - paddleWidth4-175;
      paddleYPos1 = (canvas.height / 2) - (paddleHeight1 / 2);
      paddleYPos2 = (canvas.height / 2) - (paddleHeight2 / 2);
-     paddleYPos3 = (canvas.height / 2) - (paddleHeight2 / 2);
-     paddleYPos4 = (canvas.height / 2) - (paddleHeight2 / 2);
+//     paddleYPos3 = (canvas.height / 2) - (paddleHeight2 / 2);
+//     paddleYPos4 = (canvas.height / 2) - (paddleHeight2 / 2);
      reset = false; }
     }
             function BallColloideWalls(){
@@ -324,55 +324,20 @@ if (menu == false) {
             BallYSpeed = -BallYSpeed;
             }
         }
-    
-    function hitTopOrBottom(){
-        var bottomLeftX = paddleXPos1;
-        var bottomLeftY = paddleYPos1 + paddleHeight1;
-        var bottomSpecialX = paddleXPos1 + paddleWidth1;
-        var bottomSpecialY = paddleYPos1 + paddleHeight1 - paddleWidth1;
-        var ballDistanceLeft = Math.sqrt( (bottomLeftX-BallXPos)*(bottomLeftX -BallXPos) + (bottomLeftY-BallYPos - ballRadius)*(bottomLeftY-BallYPos - ballRadius));
-        var ballDistanceSpecial = Math.sqrt( (bottomSpecialX-BallXPos)*(bottomSpecialX -BallXPos) + (bottomSpecialY-BallYPos - ballRadius)*(bottomSpecialY-BallYPos-ballRadius));
-        if (ballDistanceSpecial > ballDistanceLeft){
-           
-            return true;
-        } else{
-            return false;
-        }
-    }
-    
     function BallColloidePaddle1(){
         
-        var topEdge = paddleYPos1;
-        var bottomEdge = paddleYPos1 + paddleHeight1;
-        var leftEdge = paddleXPos1;
-        var rightEdge = paddleXPos1 + paddleWidth1;
-        var ballLeftEdge  = BallXPos - ballRadius;
-        var ballRightEdge = BallXPos + ballRadius;
-        var ballTopEdge   = ballLeftEdge;
-        var ballBottomEdge = ballRightEdge;
-        
-//            if  (BallXPos <= (paddleXPos1 + paddleWidth1) && paddleXPos1 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos1 + paddleHeight1) && paddleYPos1<= (BallYPos + ballRadius)) {
-        if( ballRightEdge > leftEdge && ballLeftEdge < rightEdge &&
-            BallYPos > topEdge && BallYPos < bottomEdge){
-                if(hitTopOrBottom()){
-                    BallYPos = paddleYPos1 + paddleHeight1 + ballRadius;
-                    BallYSpeed *= -1;
-                } else{
-                    BallXSpeed *= -1;
+            if  (BallXPos <= (paddleXPos1 + paddleWidth1) && paddleXPos1 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos1 + paddleHeight1) && paddleYPos1<= (BallYPos + ballRadius)) {
+                if (downPressed1 == true) {
+                    BallXSpeed = -(BallXSpeed + .5);
+                    BallYSpeed = -BallYSpeed;
+                } else if (upPressed1 == true) {
+                    BallXSpeed = -(BallXSpeed + .5);
+                    BallYSpeed = -BallYSpeed;
+                } else {
+                    BallXSpeed = -BallXSpeed;
+                    BallYSpeed = BallYSpeed;
                 }
-            
-            
-//                if (downPressed1 == true) {
-//                    BallXSpeed = -(BallXSpeed + .5);
-//                    BallYSpeed = -BallYSpeed;
-//                } else if (upPressed1 == true) {
-//                    BallXSpeed = -(BallXSpeed + .5);
-//                    BallYSpeed = -BallYSpeed;
-//                } else {
-//                    BallXSpeed = -BallXSpeed;
-//                    BallYSpeed = BallYSpeed;
-//                }
-//                 audio2.play();
+                 audio2.play();
             }
     }
     
@@ -413,9 +378,9 @@ if (menu == false) {
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawPaddle1();
-        drawPaddle3();
+//        drawPaddle3();
         drawPaddle2();
-        drawPaddle4();
+//        drawPaddle4();
         drawBall();
         centerline();
         drawScore1();
@@ -425,8 +390,8 @@ if (menu == false) {
         BallColloideWalls();
         BallColloidePaddle1();
         BallColloidePaddle2();
-        BallColloidePaddle3();
-        BallColloidePaddle4();
+//        BallColloidePaddle3();
+//        BallColloidePaddle4();
         win();
         resetGame();
 
