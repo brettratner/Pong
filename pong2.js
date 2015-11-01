@@ -324,41 +324,112 @@ if (menu == false) {
             BallYSpeed = -BallYSpeed;
             }
         }
+    
+    
+ function hitTopOrBottom(){
+        var bottomLeftX = paddleXPos1;
+        var bottomLeftY = paddleYPos1 + paddleHeight1;
+        var bottomSpecialX = paddleXPos1 + paddleWidth1;
+        var bottomSpecialY = paddleYPos1 + paddleHeight1 - paddleWidth1;
+        var ballDistanceLeft = Math.sqrt( (bottomLeftX-BallXPos)*(bottomLeftX -BallXPos) + (bottomLeftY-BallYPos - ballRadius)*(bottomLeftY-BallYPos - ballRadius));
+        var ballDistanceSpecial = Math.sqrt( (bottomSpecialX-BallXPos)*(bottomSpecialX -BallXPos) + (bottomSpecialY-BallYPos - ballRadius)*(bottomSpecialY-BallYPos-ballRadius));
+        if (ballDistanceSpecial > ballDistanceLeft){
+           
+            return true;
+        } else{
+            return false;
+        }
+    }
+    
     function BallColloidePaddle1(){
         
-            if  (BallXPos <= (paddleXPos1 + paddleWidth1) && paddleXPos1 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos1 + paddleHeight1) && paddleYPos1<= (BallYPos + ballRadius)) {
-                if (downPressed1 == true) {
-                    BallXSpeed = -(BallXSpeed + .5);
-                    BallYSpeed = -BallYSpeed;
-                } else if (upPressed1 == true) {
-                    BallXSpeed = -(BallXSpeed + .5);
-                    BallYSpeed = -BallYSpeed;
-                } else {
-                    BallXSpeed = -BallXSpeed;
-                    BallYSpeed = BallYSpeed;
+        var topEdge = paddleYPos1;
+        var bottomEdge = paddleYPos1 + paddleHeight1;
+        var leftEdge = paddleXPos1;
+        var rightEdge = paddleXPos1 + paddleWidth1;
+        var ballLeftEdge  = BallXPos - ballRadius;
+        var ballRightEdge = BallXPos + ballRadius;
+        var ballTopEdge   = ballLeftEdge;
+        var ballBottomEdge = ballRightEdge;
+        
+//            if  (BallXPos <= (paddleXPos1 + paddleWidth1) && paddleXPos1 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos1 + paddleHeight1) && paddleYPos1<= (BallYPos + ballRadius)) {
+        if( ballRightEdge > leftEdge && ballLeftEdge < rightEdge &&
+            BallYPos > topEdge && BallYPos < bottomEdge){
+                if(hitTopOrBottom()){
+                    BallYPos = paddleYPos1 + paddleHeight1 + ballRadius;
+                    BallYSpeed *= -1;
+                } else{
+                    BallXSpeed *= -1;
                 }
+            
+            
+//                if (downPressed1 == true) {
+//                    BallXSpeed = -(BallXSpeed + .5);
+//                    BallYSpeed = -BallYSpeed;
+//                } else if (upPressed1 == true) {
+//                    BallXSpeed = -(BallXSpeed + .5);
+//                    BallYSpeed = -BallYSpeed;
+//                } else {
+//                    BallXSpeed = -BallXSpeed;
+//                    BallYSpeed = BallYSpeed;
+//                }
                  audio2.play();
             }
     }
     
-    function BallColloidePaddle2(){
-        
-            if  (BallXPos <= (paddleXPos2 + paddleWidth2) && paddleXPos2 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos2 + paddleHeight2) && paddleYPos2<= (BallYPos + ballRadius)) {
-                
-         
-            if (downPressed2 == true) {
-                BallXSpeed = -BallXSpeed;
-                BallYSpeed = -(BallYSpeed + .5);
-            } else if (upPressed2 == true) {
-                BallXSpeed = -BallXSpeed;
-                BallYSpeed = -(BallYSpeed + .5);
-            } else {
-                BallXSpeed = -BallXSpeed;
-                BallYSpeed = BallYSpeed;
-            }
-             audio2.play();
+    
+     function hitTopOrBottom2(){
+        var bottomLeftX = paddleXPos2;
+        var bottomLeftY = paddleYPos2+ paddleHeight2;
+        var bottomSpecialX = paddleXPos2 + paddleWidth2;
+        var bottomSpecialY = paddleYPos2 + paddleHeight2 - paddleWidth2;
+        var ballDistanceLeft = Math.sqrt( (bottomLeftX-BallXPos)*(bottomLeftX -BallXPos) + (bottomLeftY-BallYPos - ballRadius)*(bottomLeftY-BallYPos - ballRadius));
+        var ballDistanceSpecial = Math.sqrt( (bottomSpecialX-BallXPos)*(bottomSpecialX -BallXPos) + (bottomSpecialY-BallYPos - ballRadius)*(bottomSpecialY-BallYPos-ballRadius));
+        if (ballDistanceSpecial > ballDistanceLeft){
+           
+            return true;
+        } else{
+            return false;
         }
     }
+    
+    function BallColloidePaddle2(){
+        
+        var topEdge = paddleYPos2;
+        var bottomEdge = paddleYPos2 + paddleHeight2;
+        var leftEdge = paddleXPos2;
+        var rightEdge = paddleXPos2 + paddleWidth2;
+        var ballLeftEdge  = BallXPos - ballRadius;
+        var ballRightEdge = BallXPos + ballRadius;
+        var ballTopEdge   = ballLeftEdge;
+        var ballBottomEdge = ballRightEdge;
+        
+//            if  (BallXPos <= (paddleXPos1 + paddleWidth1) && paddleXPos1 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos1 + paddleHeight1) && paddleYPos1<= (BallYPos + ballRadius)) {
+        if( ballRightEdge > leftEdge && ballLeftEdge < rightEdge &&
+            BallYPos > topEdge && BallYPos < bottomEdge){
+                if(hitTopOrBottom2()){
+                    BallYPos = paddleYPos2 + paddleHeight2 + ballRadius;
+                    BallYSpeed *= -1;
+                } else{
+                    BallXSpeed *= -1;
+                }
+            
+            
+//                if (downPressed1 == true) {
+//                    BallXSpeed = -(BallXSpeed + .5);
+//                    BallYSpeed = -BallYSpeed;
+//                } else if (upPressed1 == true) {
+//                    BallXSpeed = -(BallXSpeed + .5);
+//                    BallYSpeed = -BallYSpeed;
+//                } else {
+//                    BallXSpeed = -BallXSpeed;
+//                    BallYSpeed = BallYSpeed;
+//                }
+                 audio2.play();
+            }
+    }
+    
+    
     function BallColloidePaddle3(){
         
             if  (BallXPos <= (paddleXPos3 + paddleWidth3) && paddleXPos3 <= (BallXPos + ballRadius) && BallYPos <= (paddleYPos3 + paddleHeight3) && paddleYPos3<= (BallYPos + ballRadius)) {  
