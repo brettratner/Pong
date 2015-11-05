@@ -23,6 +23,14 @@ h2{
     padding-bottom: 50px;
     color:white;
 }
+a {
+    text-decoration: none;
+    color:white;
+}
+a:hover{
+    text-decoration: underline;
+    color:lightsalmon;
+}
 .twoPlayer{
      text-align: center;
     padding: 50px;

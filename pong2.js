@@ -250,16 +250,20 @@ if (menu == false) {
         return min + Math.floor(Math.random() * (max - min + 1));
     }
 
-    function player1Score() {
+    function player2Score() {
         if (BallXPos < -5) {
                 BallXPos = canvas.width / 2;
                 BallYPos = canvas.height / 2;
                 BallXSpeed = -BallXSpeed;
                 score2++;
+          
         }
+          if(score1 >= score1 + 2 && score2 <= score2 + 0){
+                BallXSpeed = -BallXSpeed *5;
+            }
     }
     
-            function player2Score(){
+            function player1Score(){
         if (BallXPos > canvas.width + 5) {
                 BallXPos = canvas.width / 2;
                 BallYPos = canvas.height / 2;
