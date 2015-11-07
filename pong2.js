@@ -18,10 +18,10 @@ var paddleHeight2 = 75;
 var paddleHeight3 = 35;
 var paddleHeight4 = 35;
 // length of the paddles
-var paddleWidth1 = 10;
-var paddleWidth2 = 10;
-var paddleWidth3 = 10;
-var paddleWidth4 = 10;
+var paddleWidth1 = 6;
+var paddleWidth2 = 6;
+var paddleWidth3 = 6;
+var paddleWidth4 = 6;
 // sets the paddle on the center to start of Horizontally 
 var paddleXPos1 = 5;
 var paddleXPos2 = canvas.width - paddleWidth2 - 5;
@@ -49,8 +49,11 @@ var menu  = false;
 var player1Win = false;
 var player2Win = false;
 var reset = false;
+var threeInARow1 = false;
+var threeInARow2 = false;
+
 var randomBallAngle = Math.floor(1 + Math.random() * 5)
-    //        var audio = new Audio('pause.mp3');
+              var audio = new Audio('pause.mp3');
               var audio2 = new Audio('bounce.m4a');
     //        var audio3 = new Audio('pop2.mp3');
     //        var audio4 = new Audio('DinoMolly.mp3');
@@ -59,7 +62,7 @@ var randomBallAngle = Math.floor(1 + Math.random() * 5)
     //        var audio7 = new Audio('blub.mp3');
     //        var audio8 = new Audio('explosion.mp3');
     //        var audio9 = new Audio('sci_fi_engine_shut_down.mp3');
-    //        var breakoutSong = new Audio('breakout.m4a');
+              var breakoutSong = new Audio('breakout.m4a');
     //        var winning = new Audio("yayayyayay.mp3");
 
 document.addEventListener("keydown", keyDownHandler, false);
@@ -238,13 +241,13 @@ if (menu == false) {
     function pauseText() {
         ctx.font = "100px Arial";
         ctx.fillStyle = "#000";
-        ctx.fillText("PAUSED", canvas.width / 4.5, canvas.height / 1.4);
+        ctx.fillText("PAUSED", canvas.width / 3.4, canvas.height / 1.8);
     }
 
-    //        function playThatFunkyMusicWhiteBoy() {
-    //            audio.loop = true;
-    //            audio.play();
-    //        }
+            function playThatFunkyMusicWhiteBoy() {
+                audio.loop = true;
+                audio.play();
+            }
 
     function getRandom(min, max) {
         return min + Math.floor(Math.random() * (max - min + 1));
@@ -256,11 +259,25 @@ if (menu == false) {
                 BallYPos = canvas.height / 2;
                 BallXSpeed = -BallXSpeed;
                 score2++;
-          
-        }
-          if(score1 >= score1 + 2 && score2 <= score2 + 0){
-                BallXSpeed = -BallXSpeed *5;
+                if(score1 > 3 || score2 > 3){
+                BallXSpeed = 3;
             }
+            else if(score1 > 6 || score2 > 6){
+                BallXSpeed = 3.5;
+            }
+            else if(score1 >= 9 || score2 >= 9){
+                BallXSpeed = 4;
+            }
+//            if((score2 - score1) < 3 ){
+//                BallXSpeed = -2;
+//            }
+//            else if((score2 - score1) > 3) {
+//                BallXSpeed = -3;
+//            }
+          
+            
+         
+        }
     }
     
             function player1Score(){
@@ -269,6 +286,22 @@ if (menu == false) {
                 BallYPos = canvas.height / 2;
                 BallXSpeed = -BallXSpeed;
                 score1++;
+            
+             if(score1 > 3 || score2 > 3){
+                BallXSpeed = -3;
+            }
+            else if(score1 > 6 || score2 > 6){
+                BallXSpeed = -3.5;
+            }
+            else if(score1 >= 9 || score2 >= 9){
+                BallXSpeed = -4;
+            }
+//            if((score1 - score2) < 3 ){
+//                BallXSpeed = -2;
+//            }
+//            else if((score1 - score2) > 3){
+//                BallXSpeed = -3;
+//            }
             }
             }
     
@@ -494,13 +527,13 @@ if (menu == false) {
             }
             BallXPos += 3.15 * BallXSpeed;
             BallYPos += 3.15 * BallYSpeed;
-            //  breakoutSong.loop = true;
-            // breakoutSong.play();
-            //   audio.pause();
+                breakoutSong.loop = true;
+                breakoutSong.play();
+                audio.pause();
         } else if (pause == true) {
             pauseText();
-            //     playThatFunkyMusicWhiteBoy();
-            // breakoutSong.pause();
+                   playThatFunkyMusicWhiteBoy();
+                   breakoutSong.pause();
         }
         requestAnimationFrame(draw);
     }
